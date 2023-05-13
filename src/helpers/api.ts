@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { getTodaysDateAsISOString } from "./utils";
+import { getTodaysDateAsISOString } from "./dates";
 
 interface ErrorResponse {
   error: {

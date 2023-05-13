@@ -1,6 +1,6 @@
-import { applyTextTransform } from "./utils";
-import { authorize } from "./oauth";
-import { appendToDailyNote, ReflectApiError } from "./api";
+import { authorize } from "./helpers/oauth";
+import { applyTextTransform } from "./helpers/reflect";
+import { appendToDailyNote, ReflectApiError } from "./helpers/api";
 import { getPreferenceValues, openExtensionPreferences, LaunchProps } from "@raycast/api";
 import { confirmAlert, showToast, Toast, closeMainWindow } from "@raycast/api";
 
