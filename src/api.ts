@@ -19,8 +19,7 @@ export class ReflectApiError extends Error {
   }
 }
 
-// TODO: authorizationToken and graphId are typed as "any"" temporarily because the auto-generated types are not working
-export async function appendToDailyNote(authorizationToken: any, graphId: any, text: string, listName?: string) {
+export async function appendToDailyNote(authorizationToken: string, graphId: string, text: string, listName?: string) {
   const url = `https://reflect.app/api/graphs/${graphId}/daily-notes`;
 
   const data = {
