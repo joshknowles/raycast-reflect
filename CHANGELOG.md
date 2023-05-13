@@ -1,5 +1,8 @@
 # Reflect Changelog
 
+## [Unreleased]
+- OAuth Support
+
 ## [Quick Append] - 2023-05-08
 
 ### New Commannds

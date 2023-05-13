@@ -27,13 +27,6 @@
       ],
       "preferences": [
         {
-          "name": "authorizationToken",
-          "title": "Authorization Token",
-          "description": "Reflect Authorization Token",
-          "type": "password",
-          "required": true
-        },
-        {
           "name": "graphId",
           "title": "Graph ID",
           "description": "Reflect Graph ID",
