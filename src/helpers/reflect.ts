@@ -1,5 +1,4 @@
 import { getApplications } from "@raycast/api";
-import { format } from "date-fns";
 
 export const reflectDownload = "https://reflect.app/download";
 
@@ -9,12 +8,4 @@ export async function checkReflect() {
   if (reflectInstalled) return true;
 
   return false;
-}
-
-export function applyTextTransform(text: string, preferences: Preferences.QuickAppend) {
-  if (preferences.prependTimestamp) {
-    const timestamp = format(new Date(), "h:maaa");
-    text = `${timestamp} ${text}`;
-  }
-  return text;
 }

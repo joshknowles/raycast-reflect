@@ -1,5 +1,5 @@
 import { authorize } from "./helpers/oauth";
-import { applyTextTransform } from "./helpers/reflect";
+import { prependTimestampIfSelected } from "./helpers/dates";
 import { appendToDailyNote, ReflectApiError } from "./helpers/api";
 import { getPreferenceValues, openExtensionPreferences, LaunchProps } from "@raycast/api";
 import { confirmAlert, showToast, Toast, closeMainWindow } from "@raycast/api";
@@ -14,7 +14,7 @@ export default async (props: LaunchProps<{ arguments: Arguments.QuickAppend }>) 
 
   try {
     const authorizationToken = await authorize();
-    const text = applyTextTransform(props.fallbackText || props.arguments.text, preferences);
+    const text = prependTimestampIfSelected(props.fallbackText || props.arguments.text, preferences);
 
     await appendToDailyNote(authorizationToken, preferences.graphId, text, preferences.listName);
 

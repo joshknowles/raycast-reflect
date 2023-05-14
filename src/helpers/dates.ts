@@ -4,3 +4,15 @@ import { format } from "date-fns";
 export function getTodaysDateAsISOString() {
   return format(new Date(), "yyyy-MM-dd");
 }
+
+interface Preferences {
+  prependTimestamp?: boolean;
+}
+
+export function prependTimestampIfSelected(text: string, preferences: Preferences) {
+  if (preferences.prependTimestamp) {
+    const timestamp = format(new Date(), "h:maaa");
+    text = `${timestamp} ${text}`;
+  }
+  return text;
+}

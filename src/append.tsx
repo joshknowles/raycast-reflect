@@ -1,13 +1,15 @@
 import { appendToDailyNote, getGraphs, Graph, ReflectApiError } from "./helpers/api";
 import { authorize } from "./helpers/oauth";
+import { prependTimestampIfSelected } from "./helpers/dates";
 
 import { Action, ActionPanel, closeMainWindow, Form, popToRoot, showToast, Toast, LocalStorage } from "@raycast/api";
 import { FormValidation, useForm } from "@raycast/utils";
 import { useEffect, useState } from "react";
 
 interface FormValues {
-  parentList: string;
   note: string;
+  prependTimestamp: boolean;
+  parentList: string;
   graphId: string;
 }
 
@@ -21,8 +23,9 @@ export default function Command() {
 
       try {
         const authorizationToken = await authorize();
-        await appendToDailyNote(authorizationToken, values.graphId, values.note, values.parentList);
+        const text = prependTimestampIfSelected(values.note, values);
 
+        await appendToDailyNote(authorizationToken, values.graphId, text, values.parentList);
         await LocalStorage.setItem("graphId", values.graphId);
 
         toast.hide();
@@ -68,6 +71,7 @@ export default function Command() {
       }
     >
       <Form.TextArea {...itemProps.note} title="Note" />
+      <Form.Checkbox {...itemProps.prependTimestamp} label="Prepend Timestamp" storeValue={true} />
       <Form.TextField
         {...itemProps.parentList}
         title="Parent List (Optional)"
