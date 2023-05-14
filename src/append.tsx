@@ -1,7 +1,7 @@
 import { appendToDailyNote, getGraphs, Graph, ReflectApiError } from "./helpers/api";
 import { authorize } from "./helpers/oauth";
 
-import { Action, ActionPanel, closeMainWindow, Form, popToRoot, showToast, Toast } from "@raycast/api";
+import { Action, ActionPanel, closeMainWindow, Form, popToRoot, showToast, Toast, LocalStorage } from "@raycast/api";
 import { FormValidation, useForm } from "@raycast/utils";
 import { useEffect, useState } from "react";
 
@@ -23,6 +23,8 @@ export default function Command() {
         const authorizationToken = await authorize();
         await appendToDailyNote(authorizationToken, values.graphId, values.note, values.parentList);
 
+        await LocalStorage.setItem("graphId", values.graphId);
+
         toast.hide();
         popToRoot();
         closeMainWindow();
@@ -41,12 +43,17 @@ export default function Command() {
   });
 
   const [graphs, setGraphs] = useState<Graph[]>([]);
+  const [graphId, setGraphId] = useState<string>("");
 
   useEffect(() => {
     async function fetchData() {
+      const lastGraphId = await LocalStorage.getItem<string>("graphId");
+
       const authorizationToken = await authorize();
       const graphs = await getGraphs(authorizationToken);
       setGraphs(graphs);
+
+      if (lastGraphId) setGraphId(lastGraphId);
     }
 
     fetchData();
@@ -68,7 +75,7 @@ export default function Command() {
         storeValue={true}
       />
       <Form.Separator />
-      <Form.Dropdown {...itemProps.graphId} title="Graph">
+      <Form.Dropdown {...itemProps.graphId} title="Graph" value={graphId} onChange={setGraphId}>
         {graphs.map((graph) => (
           <Form.Dropdown.Item key={graph.id} value={graph.id} title={graph.name} />
         ))}
