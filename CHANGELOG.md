@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 - OAuth Support
+- Append
 
 ## [Quick Append] - 2023-05-08
 

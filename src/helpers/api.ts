@@ -45,3 +45,25 @@ export async function appendToDailyNote(authorizationToken: string, graphId: str
     throw new ReflectApiError(errorResponse.error.type, errorResponse.error.message);
   }
 }
+
+export interface Graph {
+  id: string;
+  name: string;
+}
+
+export async function getGraphs(authorizationToken: string) {
+  const url = "https://reflect.app/api/graphs/";
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${authorizationToken}`,
+    },
+  });
+
+  if (response.ok) {
+    return (await response.json()) as Graph[];
+  } else {
+    const errorResponse = (await response.json()) as ErrorResponse;
+    throw new ReflectApiError(errorResponse.error.type, errorResponse.error.message);
+  }
+}
