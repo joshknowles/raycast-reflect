@@ -1,7 +1,8 @@
 import { OAuth } from "@raycast/api";
 import fetch from "node-fetch";
 
-const OAUTH_PKCE_PROXY_URL = "https://reflect-oauth-proxy.herokuapp.com";
+// This is a temporary workaround hosted by the Raycast team until the Reflect OAuth API supports PKCE
+const OAUTH_PKCE_PROXY_URL = "https://reflect-pkce-oauth-proxy.herokuapp.com";
 const clientId = "7212886f8a614d4c949f4699c11b076f";
 
 const oauthClient = new OAuth.PKCEClient({
