@@ -29,7 +29,7 @@
     },
     {
       "name": "quickAppend",
-      "title": "Quick Append",
+      "title": "Quick Append to Daily Note",
       "subtitle": "Reflect",
       "description": "Quickly append to your Reflect Daily Note via command arguments or fallback text.",
       "keywords": [
